@@ -1,12 +1,18 @@
 import React from 'react';
 import { View, Image, ScrollView, Text, Dimensions, StyleSheet } from 'react-native';
+import { Route, useRoute } from '@react-navigation/native';
 import { RectButton } from 'react-native-gesture-handler';
 import { Feather, FontAwesome } from '@expo/vector-icons';
 import MapView, { Marker } from 'react-native-maps';
 
 import { Images } from '../../images';
 
+interface OrphanagesDetailsParams {
+  id: number
+}
 export const OrphanagesDetails: React.FC = () => {
+  const { params: { id } } = useRoute<Route<string, OrphanagesDetailsParams>>();
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.imagesContainer}>
