@@ -29,7 +29,7 @@ export const CustomHeader: React.FC<ICustomHeaderProps> = ({ title, showCancel =
         </BorderlessButton>
       }
 
-      {!showCancel && <View />}
+      {!showCancel && <View style={{ width: 24 }} />}
     </View>
   );
 }

@@ -30,7 +30,7 @@ export const Routes: React.FC = () => {
           component={SelectMapPosition}
           options={{
             headerShown: true,
-            header: () => <CustomHeader title="Selecione no mapa" showCancel={false} />
+            header: () => <CustomHeader title="Selecione no mapa" />
           }}
         />
 
@@ -39,7 +39,7 @@ export const Routes: React.FC = () => {
           component={OrphanagesDetails}
           options={{
             headerShown: true,
-            header: () => <CustomHeader title="Orfanato" />
+            header: () => <CustomHeader title="Orfanato" showCancel={false} />
           }}
         />
       </Navigator>
