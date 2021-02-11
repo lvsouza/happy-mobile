@@ -1,6 +1,8 @@
 import React, { useCallback } from 'react';
-import { StyleSheet, View, Dimensions, Text, TouchableOpacity } from 'react-native';
 import MapView, { Callout, Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+import { StyleSheet, View, Dimensions, Text } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { RectButton } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
 
@@ -13,38 +15,44 @@ export const OrphanagesMap: React.FC = () => {
     navigate('OrphanagesDetails');
   }, []);
 
+  const handleNavigateToCreateOrphanage = useCallback(() => {
+    navigate('SelectMapPosition');
+  }, []);
+
   return (
     <View style={styles.container}>
-      <MapView
-        provider={PROVIDER_GOOGLE}
-        style={styles.map}
-        initialRegion={{
-          latitudeDelta: 0.1,
-          longitudeDelta: 0.1,
-          latitude: -29.6760828,
-          longitude: -51.0845638,
-        }}
-      >
-        <Marker
-          icon={Images.mapMarker}
-          calloutAnchor={{ x: 2.7, y: 0.8 }}
-          coordinate={{ latitude: -29.6760828, longitude: -51.0845638 }}
+      <SafeAreaView>
+        <MapView
+          provider={PROVIDER_GOOGLE}
+          style={styles.map}
+          initialRegion={{
+            latitudeDelta: 0.1,
+            longitudeDelta: 0.1,
+            latitude: -29.6760828,
+            longitude: -51.0845638,
+          }}
         >
-          <Callout tooltip onPress={handleNavigateToOrphanageDetails}>
-            <View style={styles.calloutContainer}>
-              <Text style={styles.calloutText}>Lar de testes</Text>
-            </View>
-          </Callout>
-        </Marker>
-      </MapView>
+          <Marker
+            icon={Images.mapMarker}
+            calloutAnchor={{ x: 2.7, y: 0.8 }}
+            coordinate={{ latitude: -29.6760828, longitude: -51.0845638 }}
+          >
+            <Callout tooltip onPress={handleNavigateToOrphanageDetails}>
+              <View style={styles.calloutContainer}>
+                <Text style={styles.calloutText}>Lar de testes</Text>
+              </View>
+            </Callout>
+          </Marker>
+        </MapView>
 
-      <View style={styles.footer}>
-        <Text style={styles.footerText}>2 orfanatos encontrados</Text>
+        <View style={styles.footer}>
+          <Text style={styles.footerText}>2 orfanatos encontrados</Text>
 
-        <TouchableOpacity style={styles.createOrphanageButton}>
-          <Feather name="plus" color="white" size={20} />
-        </TouchableOpacity>
-      </View>
+          <RectButton style={styles.createOrphanageButton} onPress={handleNavigateToCreateOrphanage}>
+            <Feather name="plus" color="white" size={20} />
+          </RectButton>
+        </View>
+      </SafeAreaView>
     </View>
   );
 }
