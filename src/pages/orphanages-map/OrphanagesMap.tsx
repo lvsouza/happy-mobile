@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import MapView, { Callout, Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { StyleSheet, View, Dimensions, Text, Alert } from 'react-native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { RectButton } from 'react-native-gesture-handler';
-import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
 
 import { IOrphanage, OrphanagesService } from '../../services';
@@ -12,7 +12,7 @@ export const OrphanagesMap: React.FC = () => {
   const [orphanages, setOrphanages] = useState<IOrphanage[]>();
   const { navigate } = useNavigation();
 
-  useEffect(() => {
+  useFocusEffect(() => {
     OrphanagesService.getAllOrphanages().then(data => {
       if (data) {
         setOrphanages(data);
@@ -20,7 +20,7 @@ export const OrphanagesMap: React.FC = () => {
         Alert.alert('Aviso!', 'Falha ao carregar as localizações dos orfanatos.', [{ text: 'Entendi' }]);
       }
     });
-  }, []);
+  });
 
   const handleNavigateToOrphanageDetails = useCallback((id: number) => {
     navigate('OrphanagesDetails', { id });
